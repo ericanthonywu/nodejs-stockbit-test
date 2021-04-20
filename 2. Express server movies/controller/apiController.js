@@ -10,7 +10,7 @@ const {Axios} = require("../../globalHelper");
  * @param {NextFunction} next
  */
 exports.searchMovies = async (req, res, next) => {
-    const {keyword, page = 1} = req.params
+    const {keyword, page = 1} = req.query
     try {
         const moviesResult = await Axios.get('', {
             params: {
