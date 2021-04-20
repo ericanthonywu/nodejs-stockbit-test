@@ -1,4 +1,4 @@
-const {db} = require("../../globalHelper");
+const {db} = require("../globalHelper");
 
 /**
  * Logging API to Database

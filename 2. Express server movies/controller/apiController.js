@@ -1,6 +1,6 @@
 const {AXIOS_ERROR} = require("../middleware/errorHandler/errorType");
 const {errorHandlerSyntax} = require("../middleware/errorHandler/errorHandlerMiddleware");
-const {Axios} = require("../../globalHelper");
+const {Axios} = require("../globalHelper");
 
 /**
  * Search Movies Controller
