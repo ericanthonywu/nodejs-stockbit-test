@@ -1,3 +1,7 @@
+const {AXIOS_ERROR} = require("../middleware/errorHandler/errorType");
+const {errorHandlerSyntax} = require("../middleware/errorHandler/errorHandlerMiddleware");
+const {Axios} = require("../../globalHelper");
+
 /**
  * Search Movies Controller
  *
@@ -5,8 +9,19 @@
  * @param {Response|ServerResponse} res
  * @param {NextFunction} next
  */
-exports.searchMovies = (req, res, next) => {
-
+exports.searchMovies = async (req, res, next) => {
+    const {keyword, page = 1} = req.params
+    try {
+        const moviesResult = await Axios.get('', {
+            params: {
+                s: keyword,
+                page
+            }
+        })
+        res.status(moviesResult.status).json({message: "Movies data", data: moviesResult})
+    } catch (e) {
+        next(errorHandlerSyntax(AXIOS_ERROR, e))
+    }
 }
 
 /**
