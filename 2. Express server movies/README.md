@@ -2,7 +2,7 @@
 
 install NodeJS (https://nodejs.org/en/download/) and Mysql 8 (https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/installing.html)
 
-Settings:
+## Settings:
 - `npm install` or `yarn install`
 - `npm start` or `yarn start`
 - create database named `apiLog` and run `database.sql`
