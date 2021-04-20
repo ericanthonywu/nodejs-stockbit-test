@@ -11,6 +11,10 @@ const {Axios} = require("../globalHelper");
  */
 exports.searchMovies = async (req, res, next) => {
     const {keyword, page = 1} = req.query
+    if (!keyword){
+        return res.status(400).json({message: "Missing keyword"})
+    }
+
     try {
         const moviesResult = await Axios.get('', {
             params: {
@@ -33,6 +37,9 @@ exports.searchMovies = async (req, res, next) => {
  */
 exports.detailMovie = async (req, res, next) => {
     const {id} = req.params
+    if (!id){
+        return res.status(400).json({message: "Id of movie is required"})
+    }
     try {
         const {data} = await Axios.get('', {
             params: {i: id}
