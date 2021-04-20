@@ -3,10 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const helmet = require("helmet");
 
 const {render404Error} = require("./middleware/errorHandler/errorHandlerMiddleware");
 
 const app = express();
+// applying http headers
+app.use(helmet())
 
 // dot env config
 require('dotenv').config({path: ".env"})
