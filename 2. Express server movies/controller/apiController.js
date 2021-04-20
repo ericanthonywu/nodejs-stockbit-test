@@ -18,7 +18,7 @@ exports.searchMovies = async (req, res, next) => {
                 page
             }
         })
-        res.status(moviesResult.status).json({message: "Movies data", data: moviesResult})
+        res.status(moviesResult.status).json({message: "Movies data", data: moviesResult.data})
     } catch (e) {
         next(errorHandlerSyntax(AXIOS_ERROR, e))
     }
