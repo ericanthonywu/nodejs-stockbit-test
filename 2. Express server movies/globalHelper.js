@@ -4,10 +4,7 @@
  * @type {AxiosInstance}
  */
 exports.Axios = require('axios').create({
-    baseURL: 'http://www.omdbapi.com/',
-    params: {
-        apikey: process.env.apiKey
-    }
+    baseURL: `http://www.omdbapi.com/?apikey=${process.env.apiKey}`,
 })
 
 /**
