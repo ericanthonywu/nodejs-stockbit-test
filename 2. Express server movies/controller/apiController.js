@@ -22,6 +22,9 @@ exports.searchMovies = async (req, res, next) => {
                 page
             }
         })
+        if (moviesResult.data.Response === "False"){
+            return res.status(200).json({message: data.Error, data: null})
+        }
         res.status(moviesResult.status).json({message: "Movies data", data: moviesResult.data})
     } catch (e) {
         next(errorHandlerSyntax(AXIOS_ERROR, e))
@@ -44,6 +47,10 @@ exports.detailMovie = async (req, res, next) => {
         const {data} = await Axios.get('', {
             params: {i: id}
         })
+
+        if (data.Response === "False"){
+            return res.status(200).json({message: data.Error, data: null})
+        }
 
         res.status(200).json({message: "Movies detail data", data})
     } catch (e) {
