@@ -1,3 +1,4 @@
+drop table log;
 create table log
 (
     id bigint unsigned auto_increment,
