@@ -1,6 +1,9 @@
-const Axios = require('axios')
-
-exports.Axios = Axios.create({
+/**
+ * Movies Axios default config
+ *
+ * @type {AxiosInstance}
+ */
+exports.Axios = require('axios').create({
     baseURL: 'http://www.omdbapi.com/',
     params: {
         apikey: process.env.apiKey
