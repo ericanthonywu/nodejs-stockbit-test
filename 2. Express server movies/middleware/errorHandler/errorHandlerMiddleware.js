@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const {MYSQL_ERROR, BCRYPT_ERROR, JWT_ERROR, TWILIO_ERROR} = require("./errorType");
+const {MYSQL_ERROR, AXIOS_ERROR} = require("./errorType");
 const fs = require('fs')
 const path = require('path')
 
@@ -47,14 +47,6 @@ exports.defaultErrorhandler = (err, req, res, next) => {
         }
     }
 
-    const referenceId = res.sentryEvId;
-    if (process.env.NODE_ENV === 'production') {
-        return res.status(500).json({
-            referenceId,
-            message: "Internal server error"
-        })
-    }
-
     switch (type) {
         case MYSQL_ERROR:
             switch (error.code) {
@@ -67,44 +59,33 @@ exports.defaultErrorhandler = (err, req, res, next) => {
                     const getDuplicateField = splitIndexNameArray.join(" ")
 
                     res.status(403).json({
-                        referenceId,
                         message: `${getDuplicateField} already exist`,
-                        sqlMessage: process.env.NODE_ENV === 'production' ? error.sqlMessage : undefined,
+                        error: process.env.NODE_ENV === 'production' ? error.sqlMessage : undefined,
                     })
                     break;
                 default:
                     res.status(500).json({
-                        referenceId,
                         message: "Failed to execute query",
                         error
                     })
             }
             break;
-        case BCRYPT_ERROR:
-            res.status(500).json({
-                message: "Failed to encrypt/decrypt",
-                error
-            })
-            break;
-        case JWT_ERROR:
-            res.status(500).json({
-                message: "Failed to sign/decode jwt",
-                error
-            })
-            break;
-        case TWILIO_ERROR:
-            res.status(500).json({
-                referenceId,
-                message: "Twilio error",
-                error,
+        case AXIOS_ERROR:
+            if (!error) {
+                return res.status(503).json({message: "omdbapi server is down"})
+            }
+
+            const {response} = error
+            return res.status(500).json({
+                message: "failed to get movies data",
+                error: {message: response.data.Error, status: response.status}
             })
             break;
         default:
             console.log("error unknown", err)
             res.status(500).json({
-                referenceId,
                 message: "unknown error",
-                err
+                error
             });
     }
 }
