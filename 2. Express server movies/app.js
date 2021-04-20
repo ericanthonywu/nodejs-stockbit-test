@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const {render404Error} = require("./middleware/errorHandler/errorHandlerMiddleware");
 
 const app = express();
+
 // applying http headers
 app.use(helmet())
 
