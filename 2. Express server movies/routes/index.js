@@ -5,6 +5,6 @@ const router = express.Router();
 /* GET home page. */
 router.get('/search', searchMovies);
 
-router.get('/detail', detailMovie)
+router.get('/detail/:id', detailMovie)
 
 module.exports = router;

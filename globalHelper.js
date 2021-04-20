@@ -13,7 +13,6 @@ exports.Axios = require('axios').create({
 /**
  * Database global connection
  *
- * @type {*|Knex<any, unknown[]>}
  */
 exports.db = require('knex')({
     client: process.env.DB_CONNECTION,
