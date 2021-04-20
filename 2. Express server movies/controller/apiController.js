@@ -16,3 +16,6 @@ exports.searchMovies = (req,res,next) => {
  * @param {Response|ServerResponse} res
  * @param {NextFunction} next
  */
+exports.detailMovie = (req, res, next) => {
+
+}
