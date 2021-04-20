@@ -31,6 +31,15 @@ exports.searchMovies = async (req, res, next) => {
  * @param {Response|ServerResponse} res
  * @param {NextFunction} next
  */
-exports.detailMovie = (req, res, next) => {
+exports.detailMovie = async (req, res, next) => {
+    const {id} = req.params
+    try {
+        const {data} = await Axios.get('', {
+            params: {i: id}
+        })
 
+        res.status(200).json({message: "Movies detail data", data})
+    } catch (e) {
+        next(errorHandlerSyntax(AXIOS_ERROR, e))
+    }
 }
