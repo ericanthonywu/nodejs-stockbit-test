@@ -8,9 +8,10 @@ const {db} = require("../globalHelper");
  * @param {NextFunction} next
  */
 exports.mysqlLogging = (req, res, next) => {
+    console.log(req)
     db('log').insert({
         params: JSON.stringify(req.params),
-        queryString: JSON.stringify(req.params),
+        queryString: JSON.stringify(req.query),
         endpoint: req.path
     }).catch(console.log)
 
